@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<style>
+    :root { --blue: #4d94ff; --bg: #0b111e; --card: #151d2e; --yellow: #ffcc00; }
+    body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; }
+    
+    /* Xóa quảng cáo Tiiny */
+    #tiiny-host-badge, .tiiny-host-badge { display: none !important; }
+
+    .panel { width: 100%; border-radius: 20px; overflow: hidden; background: var(--bg); position: relative; border: 1px solid #222; }
+    
+    .header { text-align: center; padding: 20px 0; background: transparent; }
+    .header h1 { margin: 0; font-size: 24px; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; font-weight: 800; }
+
+    /* Khối Tâm Ảo (Giống video) */
+    .crosshair-box { background: var(--card); margin: 10px; padding: 15px; border-radius: 15px; border: 1px solid #2a354d; display: flex; align-items: center; justify-content: space-between; }
+    .cross-info { display: flex; align-items: center; gap: 15px; }
+    .icon-circle { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--blue); }
+
+    .content { padding: 10px; }
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: transparent; margin-bottom: 5px; border-bottom: 1px solid #1a2233; }
+    .info { display: flex; align-items: center; gap: 12px; }
+    .info b { font-size: 14px; color: #a5b4fc; text-transform: uppercase; }
+    .status-text { font-size: 11px; color: #64748b; font-weight: bold; }
+
+    /* Switch chuẩn video */
+    .sw { position: relative; width: 46px; height: 24px; }
+    .sw input { opacity: 0; width: 0; height: 0; }
+    .sl { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #1e293b; border-radius: 24px; transition: .3s; }
+    .sl:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: #475569; border-radius: 50%; transition: .3s; }
+    input:checked + .sl { background: var(--yellow); }
+    input:checked + .sl:before { transform: translateX(22px); background: #fff; }
+
+    /* PHẦN SCRIPT RUN (Giống 100% video) */
+    .script-box { background: #05080f; margin: 10px; padding: 15px; border-radius: 10px; border: 1px solid #1a2233; height: 150px; overflow: hidden; font-family: 'Courier New', monospace; font-size: 11px; }
+    .script-header { color: #4ade80; margin-bottom: 10px; font-weight: bold; }
+    .script-content { color: #94a3b8; line-height: 1.6; }
+    .blue { color: var(--blue); }
+    .green { color: #4ade80; }
+
+    .footer { text-align: center; padding: 10px; color: var(--blue); font-size: 10px; font-weight: bold; opacity: 0.8; }
+</style>
+</head>
+<body>
+<div class="panel">
+    <div class="header"><h1>AIMLOCK PANEL 3.0</h1></div>
+
+    <div class="crosshair-box">
+        <div class="cross-info">
+            <div class="icon-circle">🎯</div>
+            <div><b style="display:block; font-size:14px; color:var(--yellow)">TÂM ẢO</b><small style="color:#64748b">Hiển thị tâm ngắm</small></div>
+        </div>
+        <label class="sw"><input type="checkbox" onchange="runLog('Crosshair')"><span class="sl"></span></label>
+    </div>
+
+    <div class="content">
+        <div class="item"><div class="info">⚡ <b>OPTIMIZE</b></div><div style="display:flex; align-items:center; gap:10px;"><span class="status-text">OFF</span><label class="sw"><input type="checkbox" onchange="runLog('Optimize')"><span class="sl"></span></label></div></div>
+        <div class="item"><div class="info">🎯 <b>SENSITIVITY PRO</b></div><div style="display:flex; align-items:center; gap:10px;"><span class="status-text">OFF</span><label class="sw"><input type="checkbox" onchange="runLog('Sens')"><span class="sl"></span></label></div></div>
+        <div class="item"><div class="info">🛡️ <b>LEGET PRO</b></div><div style="display:flex; align-items:center; gap:10px;"><span class="status-text">OFF</span><label class="sw"><input type="checkbox" onchange="runLog('Leget')"><span class="sl"></span></label></div></div>
+        <div class="item"><div class="info">🔥 <b>AIMLOCK HEAD</b></div><div style="display:flex; align-items:center; gap:10px;"><span class="status-text">OFF</span><label class="sw"><input type="checkbox" onchange="runLog('Aimlock')"><span class="sl"></span></label></div></div>
+    </div>
+
+    <div class="script-box">
+        <div class="script-header">SCRIPT RUN</div>
+        <div id="log" class="script-content">
+            > [+] INITIALIZING...<br>
+            > boot.seq :: 20673ms<br>
+            > <span class="blue">syscall.hook -> attach()</span>
+        </div>
+    </div>
+
+    <div class="footer">DEV: QUANGKHAI X ADR</div>
+</div>
+
+<script>
+    const logBox = document.getElementById('log');
+    function runLog(name) {
+        const time = Math.floor(Math.random() * 50000);
+        logBox.innerHTML += `<br>> <span class="green">[+] ${name.toUpperCase()} -> OK</span>`;
+        logBox.innerHTML += `<br>> boot.seq :: ${time}ms`;
+        logBox.innerHTML += `<br>> <span class="blue">inject overlay -> true</span>`;
+        
+        // Tự cuộn xuống dưới cùng
+        const parent = logBox.parentElement;
+        parent.scrollTop = parent.scrollHeight;
+    }
+</script>
+</body></html>
